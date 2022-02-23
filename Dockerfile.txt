@@ -1,0 +1,32 @@
+FROM node:latest
+
+# Add package file
+COPY package*.json ./
+
+# Install deps
+RUN npm i
+
+# Copy source
+COPY .env ./.env
+COPY src ./src
+COPY tsconfig.json ./tsconfig.json
+COPY prisma ./prisma
+
+# wait for db & prisma scripts
+# ---- copy script
+COPY scripts/wait-for-postgres.sh ./wait-for-postgres.sh
+# ---- install psql
+RUN apt-get update
+RUN apt-get -y install postgresql-client
+# ---- make scripts executable
+RUN chmod +x wait-for-postgres.sh
+
+# RUN npx prisma generate
+RUN npm run generate
+
+# Build dist
+RUN npm run build
+
+EXPOSE 8000
+# CMD ["npm", "run", "start"]
+CMD ["./wait-for-postgres.sh", "db", "npm", "run", "start"]
