@@ -1,5 +1,4 @@
 node_modules
 .clinic
 .vscode
-media
-docker_scripts
+scripts

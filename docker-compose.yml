@@ -1,0 +1,28 @@
+version: "3"
+
+services:
+  db:
+    image: postgres
+    restart: unless-stopped
+    container_name: dbpostgres
+    # hostname: db
+    environment:
+      # POSTGRES_NAME: mydb
+      POSTGRES_USER: dbpostgres
+      POSTGRES_PASSWORD: dbpostgres
+    volumes:
+      - ./db:/var/lib/postgresql/data
+    expose:
+      - 5432
+    ports:
+      - 5432:5432
+    # networks:
+    #   - net
+
+# networks:
+#   net:
+#     driver: bridge
+
+# TODO: do I need smth like that? (volume: direct dir vs docker named volume)
+# volumes:
+#   postgres:

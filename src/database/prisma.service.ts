@@ -13,6 +13,7 @@ export class PrismaService {
 
 	async connect(): Promise<void> {
 		try {
+			this.logger.log('[PrismaService] Начало подключения к базе данных');
 			await this.client.$connect();
 			this.logger.log('[PrismaService] Успешно подключились к базе данных');
 		} catch (e) {
