@@ -1,8 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { IMiddleware } from './middleware.interface';
-import { verify, JwtPayload } from 'jsonwebtoken';
-import { injectable, inject } from 'inversify';
-import { TYPES } from '../types';
+import { verify } from 'jsonwebtoken';
 import 'reflect-metadata';
 
 export class AuthMiddleware implements IMiddleware {
@@ -15,9 +13,11 @@ export class AuthMiddleware implements IMiddleware {
 					next();
 				} else if (payload) {
 					req.user = (payload as any).email;
+					next();
 				}
 			});
+		} else {
+			next();
 		}
-		next();
 	}
 }
