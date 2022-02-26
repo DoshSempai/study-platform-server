@@ -8,12 +8,12 @@ import { IExceptionFilter } from './errors/exception.filter.interface';
 import { ILogger } from './logger/logger.interface';
 import { LoggerService } from './logger/logger.service';
 import { TYPES } from './types';
-import { UserController } from './users/users.controller';
-import { IUserController } from './users/users.controller.interface';
-import { UsersRepository } from './users/users.repository';
-import { IUsersRepository } from './users/users.repository.interface';
-import { UserService } from './users/users.service';
-import { IUserService } from './users/users.service.interface';
+import { UserController } from './users/controller/users.controller';
+import { IUserController } from './users/controller/users.controller.interface';
+import { UsersRepository } from './users/repository/users.repository';
+import { IUsersRepository } from './users/repository/users.repository.interface';
+import { UserService } from './users/service/users.service';
+import { IUserService } from './users/service/users.service.interface';
 
 export interface IBootstrapReturn {
 	appContainer: Container;

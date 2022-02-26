@@ -1,15 +1,15 @@
 import { NextFunction, Request, Response } from 'express';
 import { injectable, inject } from 'inversify';
-import { BaseController } from '../common/base.controller';
-import { HTTPError } from '../errors/http-error.class';
-import { ILogger } from '../logger/logger.interface';
-import { TYPES } from '../types';
+import { BaseController } from '../../common/base.controller';
+import { HTTPError } from '../../errors/http-error.class';
+import { ILogger } from '../../logger/logger.interface';
+import { TYPES } from '../../types';
 import 'reflect-metadata';
 import { IUserController } from './users.controller.interface';
-import { UserLoginDto } from './dto/user-login.dto';
-import { UserRegisterDto } from './dto/user-register.dto';
-import { IUserService } from './users.service.interface';
-import { ValidateMiddleware } from '../common/validate.middleware';
+import { UserLoginDto } from '../dto/user-login.dto';
+import { UserRegisterDto } from '../dto/user-register.dto';
+import { IUserService } from '../service/users.service.interface';
+import { ValidateMiddleware } from '../../common/validate.middleware';
 
 @injectable()
 export class UserController extends BaseController implements IUserController {

@@ -7,7 +7,7 @@ import { TYPES } from './types';
 import 'reflect-metadata';
 import { IExceptionFilter } from './errors/exception.filter.interface';
 import { IConfigService } from './config/config.service.interface';
-import { UserController } from './users/users.controller';
+import { UserController } from './users/controller/users.controller';
 import { PrismaService } from './database/prisma.service';
 
 @injectable()
