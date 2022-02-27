@@ -31,6 +31,16 @@ export class TestController extends BaseController implements ITestController {
 				func: this.create,
 				middlewares: [new ValidateMiddleware(TestDto)],
 			},
+			{
+				path: '/tests',
+				method: 'put',
+				func: this.update,
+			},
+			{
+				path: '/tests',
+				method: 'delete',
+				func: this.delete,
+			},
 		]);
 	}
 
@@ -52,6 +62,44 @@ export class TestController extends BaseController implements ITestController {
 		const result = await this.testService.createTest(body);
 		if (!result) {
 			return next(new HTTPError(422, 'Не удалось создать тест'));
+		}
+
+		this.ok(res, { id: result.id, authorId: result.authorId, title: result.title });
+	}
+
+	async update(
+		{ body }: Request<{}, {}, { id: number; test: TestDto }>,
+		res: Response,
+		next: NextFunction,
+	): Promise<void> {
+		const { id, test } = body;
+		const userInfo = await this.userService.getUserById(test.authorId);
+		if (!userInfo) {
+			return next(new HTTPError(401, 'Ошибка авторизации'));
+		}
+
+		const result = await this.testService.updateTest(id, test);
+		if (!result) {
+			return next(new HTTPError(422, 'Не удалось обновить тест'));
+		}
+
+		this.ok(res, { id: result.id, authorId: result.authorId, title: result.title });
+	}
+
+	async delete(
+		{ body }: Request<{}, {}, { id: number; test: TestDto }>,
+		res: Response,
+		next: NextFunction,
+	): Promise<void> {
+		const { id, test } = body;
+		const userInfo = await this.userService.getUserById(test.authorId);
+		if (!userInfo) {
+			return next(new HTTPError(401, 'Ошибка авторизации'));
+		}
+
+		const result = await this.testService.deleteTest(id);
+		if (!result) {
+			return next(new HTTPError(422, 'Не удалось удалить тест'));
 		}
 
 		this.ok(res, { id: result.id, authorId: result.authorId, title: result.title });

@@ -35,4 +35,25 @@ export class TestsRepository implements ITestsRepository {
 			},
 		});
 	}
+
+	async update(id: number, test: Test): Promise<TestModel> {
+		return this.prismaService.client.testModel.update({
+			where: { id },
+			data: {
+				authorId: test.authorId,
+				title: test.title,
+				testMode: test.testMode,
+				trainMode: test.trainMode,
+				parole: test.parole,
+				test: test.test,
+				results: test.results,
+			},
+		});
+	}
+
+	async delete(id: number): Promise<TestModel> {
+		return this.prismaService.client.testModel.delete({
+			where: { id },
+		});
+	}
 }

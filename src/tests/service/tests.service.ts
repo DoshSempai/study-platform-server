@@ -30,4 +30,21 @@ export class TestService implements ITestService {
 	async getTests(): Promise<TestModel[]> {
 		return this.testsRepository.findMany();
 	}
+
+	async updateTest(id: number, dtoTest: TestDto): Promise<TestModel | null> {
+		const newTest = new Test(
+			dtoTest.authorId,
+			dtoTest.title,
+			dtoTest.testMode,
+			dtoTest.trainMode,
+			dtoTest.parole,
+			dtoTest.test,
+			dtoTest.results,
+		);
+		return this.testsRepository.update(id, newTest);
+	}
+
+	async deleteTest(id: number): Promise<TestModel | null> {
+		return this.testsRepository.delete(id);
+	}
 }

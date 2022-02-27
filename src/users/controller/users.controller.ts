@@ -50,7 +50,7 @@ export class UserController extends BaseController implements IUserController {
 			return next(new HTTPError(401, 'Ошибка авторизации', 'login'));
 		}
 		const jwt = await this.signJWT(body.email, this.configService.get('SECRET'));
-		this.ok(res, { jwt, email: userInfo.id, id: userInfo.email });
+		this.ok(res, { jwt, email: userInfo.email, id: userInfo.id });
 	}
 
 	async register(
