@@ -15,4 +15,17 @@ model UserModel {
   email     String
   password  String
   name      String
+  tests TestModel[]
+}
+
+model TestModel {
+  id        Int       @id @default(autoincrement())
+  author    UserModel @relation(fields: [authorId], references: [id])
+  authorId  Int
+  title     String
+	testMode  Boolean
+	trainMode Boolean
+	parole    String?
+  test      String
+  results   String
 }
