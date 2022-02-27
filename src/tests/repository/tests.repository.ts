@@ -26,7 +26,13 @@ export class TestsRepository implements ITestsRepository {
 
 	async findMany(): Promise<TestModel[]> {
 		return this.prismaService.client.testModel.findMany({
-			include: { author: true },
+			include: {
+				author: {
+					select: {
+						email: true,
+					},
+				},
+			},
 		});
 	}
 }

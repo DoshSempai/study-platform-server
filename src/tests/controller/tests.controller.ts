@@ -23,7 +23,7 @@ export class TestController extends BaseController implements ITestController {
 			{
 				path: '/tests',
 				method: 'get',
-				func: this.readMy,
+				func: this.read,
 			},
 			{
 				path: '/tests',
@@ -34,8 +34,9 @@ export class TestController extends BaseController implements ITestController {
 		]);
 	}
 
-	async readMy(req: Request<{}, {}, {}>, res: Response, next: NextFunction): Promise<void> {
-		this.ok(res, { readTests: 'in progress' });
+	async read(req: Request<{}, {}, {}>, res: Response, next: NextFunction): Promise<void> {
+		const tests = await this.testService.getTests();
+		this.ok(res, { tests });
 	}
 
 	async create(
