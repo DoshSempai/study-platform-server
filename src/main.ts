@@ -7,6 +7,12 @@ import { ExceptionFilter } from './errors/exception.filter';
 import { IExceptionFilter } from './errors/exception.filter.interface';
 import { ILogger } from './logger/logger.interface';
 import { LoggerService } from './logger/logger.service';
+import { TestController } from './tests/controller/tests.controller';
+import { ITestController } from './tests/controller/tests.controller.interface';
+import { TestsRepository } from './tests/repository/tests.repository';
+import { ITestsRepository } from './tests/repository/tests.repository.interface';
+import { TestService } from './tests/service/tests.service';
+import { ITestService } from './tests/service/tests.service.interface';
 import { TYPES } from './types';
 import { UserController } from './users/controller/users.controller';
 import { IUserController } from './users/controller/users.controller.interface';
@@ -28,6 +34,9 @@ export const appBindings = new ContainerModule((bind: interfaces.Bind) => {
 	bind<IUserController>(TYPES.UserController).to(UserController).inSingletonScope();
 	bind<IUserService>(TYPES.UserService).to(UserService).inSingletonScope();
 	bind<IUsersRepository>(TYPES.UsersRepository).to(UsersRepository).inSingletonScope();
+	bind<ITestController>(TYPES.TestController).to(TestController).inSingletonScope();
+	bind<ITestService>(TYPES.TestService).to(TestService).inSingletonScope();
+	bind<ITestsRepository>(TYPES.TestsRepository).to(TestsRepository).inSingletonScope();
 	bind<App>(TYPES.Application).to(App).inSingletonScope();
 });
 
