@@ -13,5 +13,13 @@
 npx prisma init
 
 npx prisma migrate dev
+
+npx prisma migrate deploy
 ```
 
+## Links
+
+### Deploy
+
+* [Prisma Prod Docs](https://www.prisma.io/docs/concepts/components/prisma-migrate#production-and-testing-environments)
+* [How To Deploy Next.js, Prisma & Postgres FullStack Application](https://www.youtube.com/watch?v=p1BJbCo0po0)
